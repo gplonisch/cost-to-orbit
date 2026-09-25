@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "last_verified": "2026-09-24",
+  "series_definition": {
+    "name": "Frontier cost to LEO",
+    "description": "The lowest publicly-available list price per kg to LEO in each anchor year. This is the FRONTIER, not an industry average and not a transacted average. Points are anchored to the arrival of a vehicle that reset the frontier.",
+    "units": "nominal USD per kilogram to Low Earth Orbit",
+    "dollar_basis": "nominal USD of each point's price_year, which is NOT its anchor year. The 1981 Shuttle figure, for example, is quoted in 2008 dollars. Deflate with price_year, never with year.",
+    "real_series": "Real values are not stored here. Use cost_to_orbit.analysis.to_real() with data/deflator.json to deflate, so the deflator is explicit and auditable rather than baked into the data.",
+    "caveats": [
+      "The frontier is what the cheapest vehicle would charge at maximum expendable payload. Almost no customer buys that. See the falcon-9-rideshare row in vehicles.json for what a small customer actually pays.",
+      "Pre-2010 points mix program-cost and list-price bases. They are not strictly comparable to the post-2010 points and are marked with lower confidence.",
+      "Nominal. In real terms the decline is steeper before 2018 and the post-2018 flattening is a real-terms decline.",
+      "year is when the vehicle reset the frontier; price_year is the dollar basis of the figure. Conflating the two overstates the real decline by a factor of more than two at the 1981 peak."
+    ]
+  },
+  "points": [
+    {
+      "year": 1967,
+      "cost_per_kg_leo": 8286,
+      "vehicle": "Saturn V",
+      "vehicle_id": "saturn-v",
+      "price_basis": "program_cost",
+      "confidence": "low",
+      "note": "Inflation-adjusted program cost per launch over 140 t payload. Contested; estimates span roughly $6,300-8,800/kg.",
+      "price_year": 2020
+    },
+    {
+      "year": 1981,
+      "cost_per_kg_leo": 54545,
+      "vehicle": "Space Shuttle",
+      "vehicle_id": "space-shuttle",
+      "price_basis": "program_cost",
+      "confidence": "medium",
+      "note": "Program cost per flight in 2008 USD over 27.5 t payload. The frontier moved backwards: reusability without cheap refurbishment.",
+      "price_year": 2008
+    },
+    {
+      "year": 2006,
+      "cost_per_kg_leo": 8117,
+      "vehicle": "Atlas V 551",
+      "vehicle_id": "atlas-v-551",
+      "price_basis": "gov_contract",
+      "confidence": "medium",
+      "note": "EELV-era expendable frontier. Price figure is 2016 reported cost applied to the 2006 debut, so this point is dated later than its anchor year.",
+      "price_year": 2016
+    },
+    {
+      "year": 2010,
+      "cost_per_kg_leo": 5167,
+      "vehicle": "Falcon 9 v1.0",
+      "vehicle_id": null,
+      "price_basis": "dedicated_list",
+      "confidence": "medium",
+      "note": "Derived: ~$54M list over 10,450 kg LEO. SpaceX enters and undercuts incumbents on expendable pricing alone, before reuse.",
+      "price_year": 2010
+    },
+    {
+      "year": 2018,
+      "cost_per_kg_leo": 1411,
+      "vehicle": "Falcon Heavy",
+      "vehicle_id": "falcon-heavy",
+      "price_basis": "dedicated_list",
+      "confidence": "medium",
+      "note": "Derived: ~$90M debut list price over 63,800 kg. Falcon 9 Block 5 in the same year was ~$2,719/kg at a $62M list price.",
+      "price_year": 2018
+    },
+    {
+      "year": 2026,
+      "cost_per_kg_leo": 1520,
+      "vehicle": "Falcon Heavy",
+      "vehicle_id": "falcon-heavy",
+      "price_basis": "dedicated_list",
+      "confidence": "high",
+      "note": "Derived: $97M list over 63,800 kg. The nominal frontier has RISEN since 2018 as SpaceX raised list prices for inflation. No competitor has undercut it.",
+      "price_year": 2026
+    }
+  ]
+}
