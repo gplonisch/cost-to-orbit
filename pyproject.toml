@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cost-to-orbit"
+version = "1.0.0"
+description = "A sourced dataset of launch price per kilogram to orbit, with the price basis kept explicit."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Gracie Plonisch" }]
+keywords = ["space-economics", "launch-cost", "dataset", "economics"]
+classifiers = [
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Astronomy",
+  "License :: OSI Approved :: MIT License",
+]
+dependencies = ["pydantic>=2.6"]
+
+[project.optional-dependencies]
+api = ["fastapi>=0.110", "uvicorn[standard]>=0.29"]
+dev = ["pytest>=8.0", "httpx>=0.27", "ruff>=0.4"]
+
+[project.scripts]
+cost-to-orbit-validate = "cost_to_orbit.validate:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cost_to_orbit"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# Query/Header in argument defaults is FastAPI's documented idiom, not a bug.
+"src/cost_to_orbit/api.py" = ["B008"]
